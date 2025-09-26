@@ -1,0 +1,170 @@
+/* --- MODERN & RESPONSIVE DASHBOARD STYLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- CSS Variables for Theming --- */
+:root {
+  --primary-color: #4F46E5;
+  --primary-hover: #4338CA;
+  --shadow-color: rgba(79, 70, 229, 0.3);
+  
+  /* Light Theme Colors (Default) */
+  --bg-color: #F9FAFB;
+  --sidebar-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --border-color: #E5E7EB;
+  --secondary-color: #F3F4F6;
+}
+
+/* --- DARK THEME OVERRIDES --- */
+body.dark {
+  --primary-color: #6D28D9;
+  --primary-hover: #5B21B6;
+  --shadow-color: rgba(109, 40, 217, 0.4);
+
+  --bg-color: #111827;
+  --sidebar-bg: #1F2937;
+  --card-bg: #1F2937;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --border-color: #374151;
+  --secondary-color: #374151;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --- Sidebar (Desktop) --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out, background-color 0.3s;
+  z-index: 1000;
+}
+
+.logo-container { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.sidebar-logo { width: 36px; height: 36px; }
+.logo-text { font-size: 22px; font-weight: 700; }
+
+.teacher-info {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+.teacher-info h4 { margin: 0 0 5px 0; font-size: 15px; font-weight: 600; color: var(--text-primary); }
+.teacher-info p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+
+.menu { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+.menu li { display: flex; align-items: center; gap: 12px; padding: 12px 16px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; font-weight: 500; color: var(--text-secondary); transition: all 0.2s; }
+.menu li:hover { background-color: var(--secondary-color); color: var(--text-primary); }
+.menu li.active { background-color: var(--primary-color); color: white; box-shadow: 0 4px 10px var(--shadow-color); }
+.csv-link { text-decoration: none; color: inherit; display: flex; align-items: center; width: 100%; gap: 12px; }
+
+.sidebar-footer { margin-top: auto; }
+.user-profile { padding: 12px 0; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; }
+.user-name { font-weight: 600; }
+.user-email { font-size: 12px; color: var(--text-secondary); }
+
+.logout-btn { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 10px; padding: 12px 16px; background: transparent; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; color: var(--text-secondary); cursor: pointer; text-align: left; }
+.logout-btn:hover { background-color: var(--secondary-color); color: var(--text-primary); }
+
+/* --- Main Content --- */
+.main-content { flex: 1; padding: 40px; overflow-y: auto; }
+.content-section { max-width: 900px; margin: 0 auto; }
+.content-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.content-subtitle { font-size: 16px; color: var(--text-secondary); margin-top: 0; margin-bottom: 32px; }
+
+/* --- Card & Grid Styles --- */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.card { background: var(--card-bg); border-radius: 12px; padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border-color); transition: background-color 0.3s; }
+.card.card-full-width { grid-column: 1 / -1; }
+.card h3 { margin-top: 0; margin-bottom: 15px;}
+.scan-message { margin-top: 16px; font-weight: 500; }
+.scanner-card { margin-top: 24px; }
+
+/* --- Button Styles --- */
+.btn-primary { background-color: var(--primary-color); color: white; border: none; border-radius: 8px; padding: 12px 20px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+.btn-primary:hover { background-color: var(--primary-hover); }
+.btn-primary:disabled { background-color: #9ca3af; cursor: not-allowed; }
+.btn-secondary { background-color: var(--secondary-color); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 16px; cursor: pointer; text-decoration: none; display: inline-block; }
+.download-btn-table { float: right; margin-bottom: 15px; text-decoration: none; }
+
+/* --- QR Code & Table Styles --- */
+.qr-container { margin-top: 16px; text-align: center; }
+.qr-code-wrapper { margin-top: 8px; background-color: white; padding: 16px; border-radius: 8px; display: inline-block; }
+.table-wrapper { width: 100%; overflow-x: auto; }
+.attendance-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.attendance-table th, .attendance-table td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); text-align: left; }
+.attendance-table th { font-weight: 600; color: var(--text-secondary); }
+
+/* --- Form & Task Card Styles --- */
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-weight: 500; margin-bottom: 8px; color: var(--text-primary); }
+.input-group input, .input-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 16px; box-sizing: border-box; transition: border-color 0.2s, box-shadow 0.2s; }
+.input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--shadow-color); }
+.input-group textarea { resize: vertical; min-height: 100px; }
+.error-message { color: #EF4444; background-color: rgba(239, 68, 68, 0.1); border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 14px; text-align: center; }
+.success-message { color: #10B981; background-color: rgba(16, 185, 129, 0.1); border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 14px; text-align: center; }
+.task-card { display: flex; flex-direction: column; }
+.task-card h3 { font-size: 18px; margin-bottom: 8px; }
+.task-card .task-author { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-top: 0; margin-bottom: 16px; }
+.task-card p { flex-grow: 1; }
+.task-card a { text-decoration: none; display: block; text-align: center; }
+.task-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+
+/* --- Delete Button & Completed State --- */
+.btn-delete { background-color: #FEE2E2; color: #DC2626; border: 1px solid #FCA5A5; border-radius: 8px; padding: 8px 16px; margin-top: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+.btn-delete:hover { background-color: #DC2626; color: white; }
+.task-card.completed { opacity: 0.7; background-color: var(--secondary-color); }
+.btn-completed { background-color: #10B981 !important; cursor: not-allowed; }
+
+/* --- Custom Modal Styles --- */
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; }
+.modal-content { background-color: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 90%; max-width: 400px; text-align: center; }
+.modal-content h3 { margin-top: 0; font-size: 22px; color: var(--text-primary); }
+.modal-content p { color: var(--text-secondary); margin-bottom: 30px; }
+.modal-actions { display: flex; justify-content: center; gap: 15px; }
+
+/* --- Mobile Responsive Styles --- */
+.mobile-header { display: none; }
+@media (max-width: 768px) {
+  .sidebar { position: fixed; top: 0; left: 0; bottom: 0; transform: translateX(-100%); box-shadow: 0 0 20px rgba(0,0,0,0.2); }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { padding: 20px; padding-top: 80px; }
+  .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+  .mobile-header { display: flex; align-items: center; justify-content: space-between; position: fixed; top: 0; left: 0; right: 0; height: 60px; background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 0 20px; z-index: 900; }
+  .hamburger-icon { font-size: 28px; background: none; border: none; cursor: pointer; color: var(--text-primary); }
+  .mobile-logo { font-size: 20px; font-weight: 700; }
+}
+
+/* --- Icon Font --- */
+[class^="icon-"]::before { display: inline-block; font-style: normal; font-size: 20px; }
+.icon-dashboard::before { content: "🏠"; }
+.icon-download::before { content: "📥"; }
+.icon-tasks::before { content: "📝"; }
+.icon-logout::before { content: "🚪"; }
+.icon-goals::before { content: "🎯"; }
+.icon-plans::before { content: "🚀"; }
+.icon-coding::before { content: "💻"; }
+
