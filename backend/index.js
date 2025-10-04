@@ -3,26 +3,18 @@ const admin = require('firebase-admin');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({ origin: true })); // Allow requests from your frontend
+app.use(cors({ origin: true }));
 app.use(express.json());
 
-// --- IMPORTANT: Firebase Admin SDK Setup ---
-// 1. Go to your Firebase Project Settings -> Service accounts.
-// 2. Click "Generate new private key" and download the JSON file.
-// 3. Rename the file to "serviceAccountKey.json" and place it in this `backend` folder.
 const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-// The secure API endpoint for creating users
 app.post('/createUser', async (req, res) => {
   try {
     const { email, password, firstName, lastName, role, instituteId, extras } = req.body;
-
-    // TODO: Add a security check here to ensure the request is from an authenticated institute admin.
-    // For the hackathon, we are keeping it simple.
 
     // 1. Create the user in Firebase Authentication
     const userRecord = await admin.auth().createUser({
@@ -46,7 +38,16 @@ app.post('/createUser', async (req, res) => {
     // 3. Set a custom role for security rules
     await admin.auth().setCustomUserClaims(userRecord.uid, { role, instituteId });
 
-    res.status(200).send({ message: `Success! User ${email} was created.` });
+    // 4. ✅ NEW: Generate a password reset link and send the email
+    // This allows the user to set their own password securely
+    const link = await admin.auth().generatePasswordResetLink(email);
+    // In a real app, you would use an email service here. For the hackathon,
+    // this link will be logged in your Render backend logs for you to see.
+    console.log(`Password reset link for ${email}: ${link}`);
+
+    res.status(200).send({ 
+        message: `Success! User ${email} was created. A password reset link has been generated.` 
+    });
 
   } catch (error) {
     console.error("Error creating new user:", error);

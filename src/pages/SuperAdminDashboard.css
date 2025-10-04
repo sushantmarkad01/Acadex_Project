@@ -1,0 +1,146 @@
+.super-admin-container {
+    padding: 2rem;
+    background-color: #f9fafb;
+    min-height: 100vh;
+}
+
+.super-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.super-admin-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.btn-logout {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #dc2626;
+}
+
+/* Default table styles for desktop */
+.application-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.application-list th,
+.application-list td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.application-list th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+}
+
+.status-pending { background-color: #fef3c7; color: #92400e; }
+.status-approved { background-color: #d1fae5; color: #065f46; }
+.status-denied { background-color: #fee2e2; color: #991b1b; }
+
+.action-buttons button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-approve { background-color: #10b981; color: white; }
+.btn-approve:hover { background-color: #059669; }
+
+.btn-deny { background-color: #6b7280; color: white; }
+.btn-deny:hover { background-color: #4b5563; }
+
+/* --- ✅ NEW & IMPROVED MOBILE STYLES --- */
+@media (max-width: 768px) {
+    .super-admin-container {
+        padding: 1rem;
+    }
+
+    .super-admin-header h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Hide the table headers on mobile */
+    .application-list thead {
+        display: none;
+    }
+
+    /* Make each row a block-level card */
+    .application-list tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        background: white;
+    }
+
+    .application-list td {
+        display: flex;
+        justify-content: space-between; /* Align label and value */
+        padding: 12px 15px;
+        border-bottom: 1px solid #f3f4f6;
+        text-align: right; /* Align value to the right */
+    }
+
+    .application-list tr td:last-child {
+        border-bottom: none;
+    }
+
+    /* Add the labels back using ::before pseudo-element */
+    .application-list td::before {
+        content: attr(data-label); /* Use data-label attribute for text */
+        font-weight: 600;
+        text-align: left;
+        margin-right: 1rem;
+        color: #374151;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+/* Add this to the end of your CSS file */
+.btn-send-link {
+    background-color: #3b82f6;
+    color: white;
+}
+.btn-send-link:hover {
+    background-color: #2563eb;
+}

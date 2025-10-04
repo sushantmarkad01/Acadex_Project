@@ -61,9 +61,25 @@ body {
   z-index: 1000;
 }
 
-.logo-container { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-.sidebar-logo { width: 36px; height: 36px; }
-.logo-text { font-size: 22px; font-weight: 700; }
+.logo-container { 
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 1rem; /* Adjust padding as needed */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo {
+    width: 100px; /* ✅ Set a fixed width for the logo */
+    height: 100px; /* ✅ Set a fixed height for the logo */
+    margin-right: 0.75rem; /* Space between logo and text */
+    object-fit: contain; 
+}
+.logo-text { 
+    color: white;
+    font-size: 1.5rem; /* Adjust font size as needed */
+    font-weight: 700;
+}
 
 .teacher-info {
   padding: 15px;

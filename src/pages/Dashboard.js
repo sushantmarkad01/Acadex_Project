@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-// FIX: Corrected import path. Assumes firebase.js is in the parent 'src' directory.
-import { auth, db } from '../firebase'; 
-// FIX: Corrected import paths. Assumes these files are in the same 'pages' directory.
+import { auth, db } from '../firebase';
 import TeacherDashboard from './TeacherDashboard';
 import StudentDashboard from './StudentDashboard';
 import InstituteAdminDashboard from './InstituteAdminDashboard';
+import SuperAdminDashboard from './SuperAdminDashboard'; // ✅ Ensure this is a default import (no curly braces)
 import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
@@ -14,9 +13,17 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const SUPER_ADMIN_UID = "ggCBKnsenPXy9gz7jjKomLcy29A3";
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
+        if (user.uid === SUPER_ADMIN_UID) {
+          setUserRole('super-admin');
+          setLoading(false);
+          return;
+        }
+
         const userDocRef = doc(db, "users", user.uid);
         try {
           const userDoc = await getDoc(userDocRef);
@@ -43,6 +50,8 @@ export default function Dashboard() {
   }
 
   switch (userRole) {
+    case 'super-admin':
+      return <SuperAdminDashboard />;
     case 'teacher':
       return <TeacherDashboard />;
     case 'student':
@@ -54,9 +63,8 @@ export default function Dashboard() {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <h1>An Error Occurred</h1>
           <p>We couldn't find your user role. Please sign out and try again.</p>
-          <button onClick={() => auth.signOut()}>Sign Out</button>
+          <button onClick={() => auth.signOut().then(() => navigate('/'))}>Sign Out</button>
         </div>
       );
   }
 }
-

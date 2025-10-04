@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";       
-import Signup from "./pages/Signup";      
+import Login from "./pages/Login";
+import InstituteApplication from "./pages/InstituteApplication";
+import CheckStatus from "./pages/CheckStatus";
 import Dashboard from "./pages/Dashboard";
 import Attendance from "./pages/Attendance";
 import FreeTime from "./pages/FreeTime";
@@ -12,7 +13,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />   {/* ✅ new route */}
+        <Route path="/apply" element={<InstituteApplication />} />
+        <Route path="/check-status" element={<CheckStatus />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/attendance" element={<Attendance />} />
         <Route path="/free-time" element={<FreeTime />} />

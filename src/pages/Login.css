@@ -142,3 +142,64 @@ body {
   }
 }
 
+/* Add these new styles to the end of your Login.css file */
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #aaa;
+  margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: #fff;
+  color: #444;
+  border: 1px solid #ddd;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-google:hover {
+  background: #f7f7f7;
+  border-color: #ccc;
+}
+
+.btn-google .fab {
+  color: #DB4437; /* Google's red color */
+  font-size: 18px;
+}
+/* Add this to the end of the file */
+.info-message {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+}
